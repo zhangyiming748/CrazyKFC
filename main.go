@@ -23,12 +23,10 @@ func main() {
 
 func day() string {
 	ms := time.Now().Format("1月2号")
-	fmt.Println(ms)
 	return ms
 }
 func subDay() string {
 	day := time.Now().Format("2") //今天
-	fmt.Println(day)
 	return day
 }
 func thisYear() string {
@@ -40,12 +38,10 @@ func subYear() string {
 	first, _ := time.ParseInLocation("20060102", "20220101", time.Local)
 	thisday := thisYear.Sub(first).Hours()
 	day := strconv.Itoa(int(thisday/24 + 1))
-	fmt.Println(day)
 	return day
 }
 func week() string {
 	_, w := getWeek()
-	fmt.Println(w + 1)
 	s := strconv.Itoa(w)
 	return s
 }
