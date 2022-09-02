@@ -10,6 +10,10 @@ import (
 	"time"
 )
 
+var (
+	cstZone = time.FixedZone("CST", 8*3600)
+)
+
 func main() {
 	a := day()      //今天
 	b := subDay()   //今天是这个月的第几天
@@ -27,15 +31,15 @@ func main() {
 }
 
 func day() string {
-	ms := time.Now().Format("1月2号")
+	ms := time.Now().In(cstZone).Format("1月2号")
 	return ms
 }
 func subDay() string {
-	day := time.Now().Format("2") //今天
+	day := time.Now().In(cstZone).Format("2") //今天
 	return day
 }
 func thisYear() string {
-	t := time.Now().Year()
+	t := time.Now().In(cstZone).Year()
 	return strconv.Itoa(t)
 }
 func subYear() string {
@@ -50,7 +54,7 @@ func week() string {
 
 func getWeek() (y, w int) {
 
-	t := time.Now().Format("20060102")
+	t := time.Now().In(cstZone).Format("20060102")
 	timeLayout := "20060102"
 	loc, _ := time.LoadLocation("Local")
 	tmp, _ := time.ParseInLocation(timeLayout, t, loc)
@@ -74,7 +78,7 @@ func communicate(a, b, c, d, e string) string {
 	}
 }
 func isThursday() string {
-	f := time.Now().Weekday().String()
+	f := time.Now().In(cstZone).Weekday().String()
 	if f == "Thursday" {
 		return "bingo"
 	} else if f == "Sunday" || f == "Monday" || f == "Tuesday" || f == "Wednesday" {
